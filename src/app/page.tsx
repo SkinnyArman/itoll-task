@@ -2,11 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
 
-// import { Button } from "@/components/ui/button"
-// import { Input } from "@/components/ui/input"
-
-export default function Component() {
+export default async function Component() {
+  const data = await fetch(
+    "https://66be043574dfc195586e5246.mockapi.io/products",
+    { cache: "no-store" }
+  ).then((res) => res.json());
+  console.log(data);
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <Header />
@@ -66,31 +69,8 @@ export default function Component() {
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-                <div
-                  key={item}
-                  className="bg-white rounded-lg shadow-sm overflow-hidden"
-                >
-                  <img
-                    src="/placeholder.svg"
-                    alt={`Product ${item}`}
-                    width={200}
-                    height={200}
-                    className="w-full h-40 object-cover"
-                    style={{ aspectRatio: "200/200", objectFit: "cover" }}
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-black">
-                      Product {item}
-                    </h3>
-                    <p className="text-dark-grey mt-1">
-                      Description for Product {item}
-                    </p>
-                    <div className="mt-4">
-                      <span className="text-black font-medium">$49.99</span>
-                    </div>
-                  </div>
-                </div>
+              {data.map((item) => (
+                <ProductCard product={item}/>
               ))}
             </div>
           </div>
