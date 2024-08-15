@@ -6,6 +6,7 @@ export default async function Component() {
     "https://66be043574dfc195586e5246.mockapi.io/products",
     { cache: "no-store" }
   ).then((res) => res.json());
+  
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">

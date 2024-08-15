@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function HeroSection() {
   return (
     <section className="flex justify-center bg-black py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center text-center md:text-left">
-        <div className="text-white">
+      <div className=" container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center text-center md:text-left">
+        <div className="animate-slidein300 opacity-0 text-white">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold ">
             Transform Your Care Routine
           </h1>
@@ -29,7 +29,7 @@ export default function HeroSection() {
             alt="a man smiling and holding a personal care product"
             width={400}
             height={400}
-            className="rounded-lg shadow-lg"
+            className="animate-slidein700 opacity-0 rounded-lg shadow-lg"
             style={{ aspectRatio: "400/400", objectFit: "cover" }}
           />
         </div>

@@ -3,12 +3,16 @@
 import ProductCard from "@/components/ProductCard";
 import { useDebouncedSearch } from "@/hooks/useDebouncedSearch";
 import { CiSearch } from "react-icons/ci";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 interface ProductSectionProps {
   products: IProduct[];
 }
 
 export default function ProductSection({ products }: ProductSectionProps) {
+  const { isVisible, elementRef } = useIntersectionObserver();
+
+  // Search functionality using the custom hook
   const search = (product, searchTerm) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -17,7 +21,10 @@ export default function ProductSection({ products }: ProductSectionProps) {
 
   return (
     <section
-      className="flex justify-center bg-light-grey py-12 md:py-24 lg:py-32"
+      ref={elementRef}
+      className={`flex justify-center bg-light-grey py-12 md:py-24 lg:py-32 transition-opacity duration-1000 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
       id="products"
     >
       <div className="container px-4 md:px-6 ">
@@ -38,9 +45,13 @@ export default function ProductSection({ products }: ProductSectionProps) {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 transition-transform duration-700 ${
+            isVisible ? "transform-none" : "transform translate-y-10 opacity-0"
+          }`}
+        >
           {filteredProducts.map((item) => (
-            <ProductCard product={item} />
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </div>
