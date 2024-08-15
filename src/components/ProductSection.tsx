@@ -2,6 +2,7 @@
 
 import ProductCard from "@/components/ProductCard";
 import { useDebouncedSearch } from "@/hooks/useDebouncedSearch";
+import { CiSearch } from "react-icons/ci";
 
 interface ProductSectionProps {
   products: IProduct[];
@@ -28,7 +29,7 @@ export default function ProductSection({ products }: ProductSectionProps) {
             Check out our top-selling and most popular products.
           </p>
           <div className="relative flex-1 max-w-md mx-auto mt-8">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               type="search"
               placeholder="Search products..."
@@ -44,25 +45,5 @@ export default function ProductSection({ products }: ProductSectionProps) {
         </div>
       </div>
     </section>
-  );
-}
-
-function SearchIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
   );
 }
