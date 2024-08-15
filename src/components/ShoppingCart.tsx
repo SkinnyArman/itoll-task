@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useCart } from "@/context/CartContext";
 import { useOutsideClick } from "@/hooks/useOutsideClick"; // Adjust the import path as needed
 
-export default function ShoppingCart({ onClose }) {
+export default function ShoppingCart({ onClose }: { onClose: () => void }) {
   const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
   const cartRef = useRef<HTMLDivElement>(null);
 
@@ -21,11 +21,11 @@ export default function ShoppingCart({ onClose }) {
           <h2 className="text-lg font-semibold">Your Cart</h2>
           <div className="flex items-center gap-2">
             <button onClick={clearCart}>
-              <TrashIcon className="h-5 w-5" />
+              <TrashIcon />
               <span className="sr-only">Clear Cart</span>
             </button>
             <button onClick={onClose}>
-              <XIcon className="h-5 w-5" />
+              <XIcon />
               <span className="sr-only">Close Cart</span>
             </button>
           </div>
@@ -53,7 +53,7 @@ export default function ShoppingCart({ onClose }) {
                   </div>
                 </div>
                 <button onClick={() => removeFromCart(item.id)}>
-                  <XIcon className="h-5 w-5" />
+                  <XIcon />
                 </button>
               </div>
             ))}
@@ -71,10 +71,9 @@ export default function ShoppingCart({ onClose }) {
   );
 }
 
-function TrashIcon(props) {
+function TrashIcon() {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -92,10 +91,9 @@ function TrashIcon(props) {
   );
 }
 
-function XIcon(props) {
+function XIcon() {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"

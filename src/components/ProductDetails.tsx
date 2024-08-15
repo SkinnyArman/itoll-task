@@ -1,7 +1,8 @@
 "use client";
 import { useCart } from "@/context/CartContext";
+import { Product } from "@/types/Product";
 
-export default function ProductDetails({ product }) {
+export default function ProductDetails({ product }: { product: Product }) {
   const { addToCart } = useCart();
 
   return (

@@ -1,6 +1,6 @@
 import Link from "next/link";
-
-export default function ProductCard({ product }) {
+import { Product } from "@/types/Product";
+export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.id}`}>
       <div

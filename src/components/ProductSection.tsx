@@ -4,16 +4,13 @@ import ProductCard from "@/components/ProductCard";
 import { useDebouncedSearch } from "@/hooks/useDebouncedSearch";
 import { CiSearch } from "react-icons/ci";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { Product } from "@/types/Product";
 
-interface ProductSectionProps {
-  products: IProduct[];
-}
-
-export default function ProductSection({ products }: ProductSectionProps) {
+export default function ProductSection({ products }: { products: Product[] }) {
   const { isVisible, elementRef } = useIntersectionObserver();
 
   // Search functionality using the custom hook
-  const search = (product, searchTerm) =>
+  const search = (product: Product, searchTerm: string) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
   const { filteredItems: filteredProducts, onSearchInputChange } =

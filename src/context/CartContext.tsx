@@ -7,20 +7,12 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  hasDiscount: boolean;
-  discountedPrice?: number;
-  image: string;
-}
+import { Product } from "@/types/Product";
+import { CartItem } from "@/types/CartItem";
 
 interface CartContextProps {
   cartItems: CartItem[];
-  addToCart: (product: CartItem) => void;
+  addToCart: (product: Product) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
   totalItems: number;
@@ -75,7 +67,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const addToCart = async (product: CartItem) => {
+  const addToCart = async (product: Product) => {
     const existingItem = cartItems.find((item) => item.name === product.name);
 
     if (existingItem) {
