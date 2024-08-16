@@ -13,3 +13,5 @@ export function debounce<T extends (...args: any[]) => void>(
     }, delay);
   };
 }
+
+export const currentYear = new Date().getFullYear();

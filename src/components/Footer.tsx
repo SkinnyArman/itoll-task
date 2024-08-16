@@ -1,28 +1,59 @@
+"use client";
+import { useEffect, useState } from "react";
+import { APP_NAME } from "@/utils/constants";
+import { currentYear } from "@/utils/helpers";
 import Link from "next/link";
 import { GiLipstick } from "react-icons/gi";
+import { AiOutlineHome, AiOutlineInfoCircle } from "react-icons/ai";
 
 export default function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <footer className="bg-black text-white py-6 px-4 md:px-6">
-      <div className="container flex flex-col md:flex-row items-center justify-between">
-        <div className="flex items-center gap-2">
+    <footer
+      className={`bg-black text-white p-2 md:p-4 fixed bottom-0 left-0 w-full z-10 justify-center flex transition-transform duration-500 ease-in-out ${
+        isVisible ? "translate-y-0" : "translate-y-full"
+      }`}
+    >
+      <div className="container flex items-center justify-between flex-col md:flex-row">
+        <div className="md:flex items-center gap-2 hidden">
           <GiLipstick className="h-6 w-6" />
-          <span className="text-lg font-semibold">Acme Store</span>
+          <span className="text-lg font-semibold">{APP_NAME}</span>
         </div>
-        <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Privacy Policy
+        <div className="flex gap-x-6">
+          <Link
+            href="#"
+            className="flex flex-col items-center justify-center text-center"
+            prefetch={false}
+          >
+            <AiOutlineHome className="md:hidden h-6 w-6 mb-1" />
+            <span className="text-sm">Home</span>
           </Link>
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Terms of Service
-          </Link>
-          <Link href="#" className="hover:underline" prefetch={false}>
-            Contact Us
+          <Link
+            href="#"
+            className="flex flex-col items-center justify-center text-center"
+            prefetch={false}
+          >
+            <AiOutlineInfoCircle className="md:hidden h-6 w-6 mb-1" />
+            <span className="text-sm">About</span>
           </Link>
         </div>
-        <p className="text-sm mt-4 md:mt-0 text-primary-foreground/80">
-          &copy; 2024 Acme Store. All rights reserved.
-        </p>
       </div>
     </footer>
   );

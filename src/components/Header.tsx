@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiLipstick } from "react-icons/gi";
 import ShoppingCart from "@/components/ShoppingCart"; // Adjust the import path as needed
+import { APP_NAME } from "@/utils/constants";
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -18,7 +19,7 @@ export default function Header() {
       <header className="bg-black text-white py-4 px-6 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <GiLipstick className="h-6 w-6" />
-          <span className="text-lg font-semibold">Acme Store</span>
+          <span className="text-lg font-semibold">{APP_NAME}</span>
         </Link>
         <div className="flex items-center gap-4">
           <nav className="hidden md:flex items-center gap-4">
