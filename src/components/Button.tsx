@@ -1,5 +1,6 @@
 import React, { ReactNode, MouseEventHandler } from "react";
 import Link from "next/link";
+import { AiOutlineLoading } from "react-icons/ai";
 
 type Mode = "primary" | "secondary" | "tertiary";
 
@@ -9,6 +10,7 @@ interface BaseButtonProps {
   children: ReactNode;
   fullWidth?: boolean;
   mode?: Mode;
+  loading?: boolean;
   rounded?: "md" | "lg" | "full";
   extraClasses?: string;
 }
@@ -20,11 +22,12 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   fullWidth = true,
   mode = "primary",
   rounded = "md",
+  loading = false,
   extraClasses = "",
 }) => {
   const colorSchemes: Record<Mode, string> = {
     primary: "bg-black text-white",
-    secondary: "bg-gray-500 text-white",
+    secondary: "bg-gray-400 text-white",
     tertiary: "bg-white text-black",
   };
 
@@ -35,8 +38,8 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   } ${colorClasses} rounded-${rounded} ${extraClasses} inline-flex items-center justify-center text-lg font-medium transition-colors hover:bg-primary-foreground/90 focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2`;
 
   const buttonElement = (
-    <button className={baseClasses} onClick={onClick}>
-      {children}
+    <button className={baseClasses} onClick={onClick} disabled={loading}>
+      {loading ? <AiOutlineLoading className="animate-spin mr-2" /> : children}
     </button>
   );
 

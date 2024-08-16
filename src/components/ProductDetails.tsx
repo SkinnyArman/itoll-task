@@ -4,7 +4,7 @@ import { Product } from "@/types/Product";
 import BaseButton from "./Button";
 
 export default function ProductDetails({ product }: { product: Product }) {
-  const { addToCart } = useCart();
+  const { addToCart, loading } = useCart();
 
   return (
     <div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6">
@@ -22,6 +22,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           mode="secondary"
           rounded="lg"
           extraClasses="h-12"
+          loading={loading}
           onClick={addToCart.bind(null, product)}
         >
           Add to Cart

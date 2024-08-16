@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   createContext,
@@ -12,17 +12,19 @@ import { CartItem } from "@/types/CartItem";
 
 interface CartContextProps {
   cartItems: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (id: number) => void;
-  clearCart: () => void;
+  addToCart: (product: Product) => Promise<void>;
+  removeFromCart: (id: number) => Promise<void>;
+  clearCart: () => Promise<void>;
   totalItems: number;
   totalPrice: number;
+  loading: boolean; // Add loading state to context
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false); // Initialize loading state
 
   // Fetch the initial cart state from the mock API backend
   useEffect(() => {
@@ -68,42 +70,60 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addToCart = async (product: Product) => {
-    const existingItem = cartItems.find((item) => item.name === product.name);
+    setLoading(true); // Set loading to true when the request starts
+    try {
+      const existingItem = cartItems.find((item) => item.name === product.name);
 
-    if (existingItem) {
-      const updatedItem = {
-        ...existingItem,
-        quantity: existingItem.quantity + 1,
-      };
-      await updateCartItemOnServer(updatedItem);
-      setCartItems((prevItems) =>
-        prevItems.map((item) =>
-          item.id === updatedItem.id ? updatedItem : item
-        )
-      );
-    } else {
-      const newItem = { ...product, quantity: 1 };
-      const serverItem = await addCartItemToServer(newItem);
-      setCartItems((prevItems) => [...prevItems, serverItem]);
+      if (existingItem) {
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity + 1,
+        };
+        await updateCartItemOnServer(updatedItem);
+        setCartItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === updatedItem.id ? updatedItem : item
+          )
+        );
+      } else {
+        const newItem = { ...product, quantity: 1 };
+        const serverItem = await addCartItemToServer(newItem);
+        setCartItems((prevItems) => [...prevItems, serverItem]);
+      }
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+    } finally {
+      setLoading(false); // Set loading to false when the request finishes
     }
   };
 
   const removeFromCart = async (id: number) => {
-    await deleteCartItemFromServer(id);
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setLoading(true);
+    try {
+      await deleteCartItemFromServer(id);
+      setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Failed to remove item from cart:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const clearCart = async () => {
-    for (const item of cartItems) {
-      await deleteCartItemFromServer(item.id);
+    setLoading(true);
+    try {
+      for (const item of cartItems) {
+        await deleteCartItemFromServer(item.id);
+      }
+      setCartItems([]); // Clear the cart locally
+    } catch (error) {
+      console.error("Failed to clear the cart:", error);
+    } finally {
+      setLoading(false);
     }
-    setCartItems([]); // Clear the cart locally
   };
 
-  // Calculate the total number of items in the cart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  // Calculate the total price of the items in the cart
   const totalPrice = cartItems.reduce(
     (sum, item) =>
       sum +
@@ -120,6 +140,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         clearCart,
         totalItems,
         totalPrice,
+        loading, // Provide the loading state to the context
       }}
     >
       {children}
