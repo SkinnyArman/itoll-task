@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useCart } from "@/context/CartContext";
 import { useOutsideClick } from "@/hooks/useOutsideClick"; // Adjust the import path as needed
+import BaseButton from "./Button";
 
 export default function ShoppingCart({ onClose }: { onClose: () => void }) {
   const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
@@ -61,9 +62,9 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
               <p className="text-muted-foreground font-medium">Total:</p>
               <p className="text-black font-medium">${totalPrice.toFixed(2)}</p>
             </div>
-            <button className="w-full bg-black text-white rounded-md py-2 mt-4">
+            <BaseButton mode="primary" rounded="md" extraClasses="py-2 mt-4">
               Checkout
-            </button>
+            </BaseButton>
           </div>
         )}
       </div>

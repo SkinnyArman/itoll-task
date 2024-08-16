@@ -1,6 +1,7 @@
 "use client";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/types/Product";
+import BaseButton from "./Button";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const { addToCart } = useCart();
@@ -17,12 +18,14 @@ export default function ProductDetails({ product }: { product: Product }) {
           </div>
           <div className="text-4xl font-bold ml-auto">${product.price}</div>
         </div>
-        <button
-          className="bg-[#ebebeb] rounded-lg h-12 text-white w-full"
+        <BaseButton
+          mode="secondary"
+          rounded="lg"
+          extraClasses="h-12"
           onClick={addToCart.bind(null, product)}
         >
           Add to Cart
-        </button>
+        </BaseButton>
       </div>
       <div className="grid gap-3 items-start order-1">
         <img

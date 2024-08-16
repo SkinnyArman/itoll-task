@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import BaseButton from "./Button";
 
 export default function HeroSection() {
   return (
@@ -14,13 +14,15 @@ export default function HeroSection() {
             designed to elevate your daily routine and enhance your well-being.
           </p>
           <div className="mt-8">
-            <Link
+            <BaseButton
               href="#products"
-              className="inline-flex items-center justify-center rounded-full text-black bg-white px-6 py-3 text-lg font-medium transition-colors hover:bg-primary-foreground/90 focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2"
-              prefetch={false}
+              mode="tertiary"
+              rounded="full"
+              fullWidth={false}
+              extraClasses="px-6 py-3"
             >
               Shop Now
-            </Link>
+            </BaseButton>
           </div>
         </div>
         <div className="flex justify-center">

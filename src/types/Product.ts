@@ -6,4 +6,5 @@ export interface Product {
   hasDiscount: boolean;
   image: string;
   discountedPrice?: number;
+  isBestSeller: boolean;
 }
