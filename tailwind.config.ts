@@ -6,14 +6,13 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class", // Use 'class' to toggle dark mode using a class on the root element
   theme: {
     extend: {
       colors: {
-        black: "#18181b",
-        white: "#fff",
-        grey: "#fafafacc",
-        "dark-grey": "#6A6A73",
-        "light-grey": "#f4f4f5",
+        primary: "var(--color-primary)", // Using CSS variable for primary color
+        text: "var(--color-text)",       // Using CSS variable for text color
+        grey: "var(--color-grey)",       // Using CSS variable for grey color
       },
       keyframes: {
         slidein: {
@@ -37,4 +36,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;

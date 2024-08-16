@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { ThemeProvider } from "@/context/ThemeContext";
+import nookies from "nookies";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,20 +29,34 @@ export const metadata: Metadata = {
     { rel: "icon", url: "icons/icon-128x128.png" },
   ],
 };
+
+interface RootLayoutProps {
+  children: ReactNode;
+  initialTheme: "light" | "dark";
+}
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  initialTheme,
+}: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <CartProvider>
-          <Header />
-          {children}
-          <Footer />
-        </CartProvider>
+      <body className={`${inter.className}`}>
+        <ThemeProvider initialTheme={initialTheme}>
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
+RootLayout.getInitialProps = async ({ ctx }: any) => {
+  const cookies = nookies.get(ctx);
+  return {
+    initialTheme: cookies.theme || "dark",
+  };
+};

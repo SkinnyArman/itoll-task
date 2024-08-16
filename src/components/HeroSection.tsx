@@ -3,20 +3,20 @@ import BaseButton from "./Button";
 
 export default function HeroSection() {
   return (
-    <section className="flex justify-center bg-black py-12 md:py-24 lg:py-32">
-      <div className=" container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center text-center md:text-left">
-        <div className="animate-slidein300 opacity-0 text-white">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold ">
+    <section className="flex bg-primary justify-center py-12 md:py-24 lg:py-32">
+      <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center text-center md:text-left">
+        <div className="text-text-primary animate-slidein300 opacity-0">
+          <h1 className="text-4xl text-text md:text-5xl lg:text-6xl font-bold ">
             Transform Your Care Routine
           </h1>
-          <p className="text-lg text-grey md:text-xl mt-4">
+          <p className="text-lg md:text-xl mt-4 text-text">
             Shop our curated selection of premium personal care essentials,
             designed to elevate your daily routine and enhance your well-being.
           </p>
           <div className="mt-8">
             <BaseButton
               href="#products"
-              mode="tertiary"
+              mode="secondary"
               rounded="full"
               fullWidth={false}
               extraClasses="px-6 py-3"

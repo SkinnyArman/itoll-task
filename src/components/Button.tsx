@@ -26,9 +26,9 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   extraClasses = "",
 }) => {
   const colorSchemes: Record<Mode, string> = {
-    primary: "bg-black text-white",
-    secondary: "bg-gray-400 text-white",
-    tertiary: "bg-white text-black",
+    primary: "bg-primary text-text",
+    secondary: "bg-grey text-text",
+    tertiary: "bg-white text-text",
   };
 
   const colorClasses = colorSchemes[mode];

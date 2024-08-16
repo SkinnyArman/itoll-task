@@ -6,9 +6,11 @@ import { FaShoppingCart } from "react-icons/fa";
 import { GiLipstick } from "react-icons/gi";
 import ShoppingCart from "@/components/ShoppingCart"; // Adjust the import path as needed
 import { APP_NAME } from "@/utils/constants";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
@@ -16,9 +18,9 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-black text-white py-4 px-6 flex items-center justify-between">
+      <header className="bg-primary text-text py-4 px-6 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <GiLipstick className="h-6 w-6" />
+          <GiLipstick className="h-6 w-6" onClick={toggleTheme} />
           <span className="text-lg font-semibold">{APP_NAME}</span>
         </Link>
         <div className="flex items-center gap-4">

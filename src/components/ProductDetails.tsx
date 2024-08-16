@@ -28,7 +28,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         <div className="flex justify-between   gap-4 mt-4">
           <div className="flex items-center border rounded-lg overflow-hidden">
             <BaseButton
-              mode="tertiary"
+              mode="secondary"
               extraClasses="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition"
               onClick={() => handleQuantityChange(-1)}
             >
@@ -43,7 +43,7 @@ export default function ProductDetails({ product }: { product: Product }) {
             />
 
             <BaseButton
-              mode="tertiary"
+              mode="secondary"
               extraClasses="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition"
               onClick={() => handleQuantityChange(1)}
             >

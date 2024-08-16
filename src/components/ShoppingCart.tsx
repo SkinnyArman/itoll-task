@@ -13,7 +13,7 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
   useOutsideClick(cartRef, onClose);
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-primary/50 z-50 flex items-center justify-center">
       <div
         ref={cartRef}
         className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
@@ -47,7 +47,7 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
                     style={{ aspectRatio: "64/64", objectFit: "cover" }}
                   />
                   <div>
-                    <h3 className="text-black font-medium">{item.name}</h3>
+                    <h3 className="text-text font-medium">{item.name}</h3>
                     <p className="text-muted-foreground text-sm">
                       ${item.price.toFixed(2)} x {item.quantity}
                     </p>
@@ -60,7 +60,7 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
             ))}
             <div className="flex items-center justify-between border-t pt-4">
               <p className="text-muted-foreground font-medium">Total:</p>
-              <p className="text-black font-medium">${totalPrice.toFixed(2)}</p>
+              <p className="text-text font-medium">${totalPrice.toFixed(2)}</p>
             </div>
             <BaseButton mode="primary" rounded="md" extraClasses="h-10 py-2 mt-4" loading={loading}>
               Checkout

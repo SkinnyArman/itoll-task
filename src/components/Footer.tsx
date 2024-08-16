@@ -27,7 +27,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`bg-black text-white p-2 md:p-4 fixed bottom-0 left-0 w-full z-10 justify-center flex transition-transform duration-500 ease-in-out ${
+      className={`bg-primary text-text border-gray-300 border border-solid p-2 md:p-4 fixed bottom-[-1px] left-[-1px] w-[101%] z-10 justify-center flex transition-transform duration-500 ease-in-out ${
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
     >

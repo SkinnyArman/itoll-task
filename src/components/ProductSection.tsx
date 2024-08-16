@@ -26,7 +26,7 @@ export default function ProductSection({ products }: { products: Product[] }) {
     >
       <div className="container px-4 md:px-6 ">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary">
+          <h2 className="text-3xl md:text-4xl font-bold">
             Featured Products
           </h2>
           <p className="text-muted-foreground mt-2 md:text-lg">
@@ -37,7 +37,7 @@ export default function ProductSection({ products }: { products: Product[] }) {
             <input
               type="search"
               placeholder="Search products..."
-              className="bg-primary-foreground text-primary rounded-full pl-10 pr-4 py-2 w-full"
+              className=" border border-solid rounded-full pl-10 pr-4 py-2 w-full"
               onChange={onSearchInputChange}
             />
           </div>

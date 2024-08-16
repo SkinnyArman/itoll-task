@@ -6,7 +6,7 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link href={`/products/${product.id}`}>
       <div
         key={product.id}
-        className="bg-white rounded-lg shadow-sm overflow-hidden h-[330px] flex flex-col cursor-pointer transform transition-transform duration-300 ease-in-out hover:scale-105 relative"
+        className="bg-white rounded-lg shadow-md overflow-hidden h-[330px] flex flex-col cursor-pointer transform transition-transform duration-300 ease-in-out hover:scale-105 relative"
       >
         <div className="relative">
           {product.isBestSeller && <BestSellerBadge />}
@@ -21,10 +21,12 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="flex flex-col justify-between flex-grow p-4">
           <div>
-            <h3 className="text-lg font-semibold text-black">{product.name}</h3>
+            <h3 className="text-lg font-semibold text-primary">
+              {product.name}
+            </h3>
             <p className="text-dark-grey mt-1">{product.description}</p>
           </div>
-          <div className="text-black font-medium mt-4">
+          <div className=" font-medium mt-4">
             {product.hasDiscount ? (
               <div className="flex items-center space-x-2">
                 <span className="line-through text-gray-500">
@@ -47,7 +49,7 @@ export default function ProductCard({ product }: { product: Product }) {
 function BestSellerBadge() {
   return (
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-      <div className="absolute transform -rotate-45 bg-yellow-300 text-black text-xs font-bold py-1 w-[150px] top-4 left-[-45px] flex items-center justify-center">
+      <div className="absolute transform -rotate-45 bg-yellow-300 text-primary text-xs font-bold py-1 w-[150px] top-4 left-[-45px] flex items-center justify-center">
         Best Seller
       </div>
     </div>
