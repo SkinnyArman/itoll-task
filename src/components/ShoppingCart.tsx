@@ -6,7 +6,7 @@ import { useOutsideClick } from "@/hooks/useOutsideClick"; // Adjust the import 
 import BaseButton from "./Button";
 
 export default function ShoppingCart({ onClose }: { onClose: () => void }) {
-  const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
+  const { cartItems, removeFromCart, clearCart, totalPrice, loading } = useCart();
   const cartRef = useRef<HTMLDivElement>(null);
 
   // Use the custom hook to detect outside clicks
@@ -62,7 +62,7 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
               <p className="text-muted-foreground font-medium">Total:</p>
               <p className="text-black font-medium">${totalPrice.toFixed(2)}</p>
             </div>
-            <BaseButton mode="primary" rounded="md" extraClasses="py-2 mt-4">
+            <BaseButton mode="primary" rounded="md" extraClasses="h-10 py-2 mt-4" loading={loading}>
               Checkout
             </BaseButton>
           </div>
