@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import nookies from "nookies";
-import { ReactNode } from "react"; // <-- Import ReactNode from 'react'
+import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,12 +23,19 @@ export const metadata: Metadata = {
       url: "https://www.linkedin.com/in/imvinojanv/",
     },
   ],
-  viewport:
-    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
     { rel: "apple-touch-icon", url: "icons/icon-128x128.png" },
     { rel: "icon", url: "icons/icon-128x128.png" },
   ],
+};
+
+// Export viewport configuration separately
+export const viewport = {
+  "minimum-scale": "1",
+  "initial-scale": "1",
+  width: "device-width",
+  "shrink-to-fit": "no",
+  "viewport-fit": "cover",
 };
 
 interface RootLayoutProps {
