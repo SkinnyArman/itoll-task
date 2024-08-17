@@ -15,7 +15,8 @@ export default async function ProductDetailsPage({
   try {
     // Fetch the product data, allowing the browser to use cached responses
     product = await fetch(
-      `https://66be043574dfc195586e5246.mockapi.io/products/${params.id}`
+      `https://66be043574dfc195586e5246.mockapi.io/products/${params.id}`,
+      { cache: "force-cache" }
     ).then((res) => {
       if (!res.ok) {
         throw new Error("Network response was not ok");
