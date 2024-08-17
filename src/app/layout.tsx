@@ -7,6 +7,7 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import nookies from "nookies";
 import { ReactNode } from "react";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
+        <ServiceWorkerRegister />
         <ThemeProvider initialTheme={initialTheme}>
           <CartProvider>
             <Header />

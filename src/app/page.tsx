@@ -1,6 +1,5 @@
 import ProductSection from "@/components/ProductSection";
 import HeroSection from "@/components/HeroSection";
-import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 export default async function Component() {
   const data = await fetch(
@@ -10,7 +9,6 @@ export default async function Component() {
 
   return (
     <div className="flex flex-col min-h-[100dvh]">
-      <ServiceWorkerRegister />
       <main className="flex-1">
         <HeroSection></HeroSection>
         <ProductSection products={data} />
