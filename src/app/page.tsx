@@ -4,8 +4,7 @@ import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 export default async function Component() {
   const data = await fetch(
-    "https://66be043574dfc195586e5246.mockapi.io/products",
-    { cache: "no-store" }
+    "https://66be043574dfc195586e5246.mockapi.io/products"
   ).then((res) => res.json());
 
   return (
