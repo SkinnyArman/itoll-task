@@ -25,27 +25,17 @@ export default async function ProductDetailsPage({
   } catch (error) {
     console.error("Fetch failed or product not available in cache:", error);
 
-    // If fetching fails, either due to network issues or other reasons
-    const cache = await caches.open("product-details-api-cache");
-    const cachedResponse = await cache.match(
-      `https://66be043574dfc195586e5246.mockapi.io/products/${params.id}`
+    // Display fallback UI if the product data is not available offline
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <CiWifiOff className="w-20 h-20" />
+        <h1 className="text-2xl font-bold mb-4">Product Not Available</h1>
+        <p className="text-gray-600">
+          This product is not available offline. Please check your connection
+          and try again.
+        </p>
+      </div>
     );
-
-    if (cachedResponse) {
-      product = await cachedResponse.json();
-    } else {
-      // Display fallback UI if the product data is not available offline
-      return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-          <CiWifiOff className="w-20 h-20" />
-          <h1 className="text-2xl font-bold mb-4">Product Not Available</h1>
-          <p className="text-gray-600">
-            This product is not available offline. Please check your connection
-            and try again.
-          </p>
-        </div>
-      );
-    }
   }
 
   // Render the product details if product data is available
