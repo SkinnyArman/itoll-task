@@ -71,6 +71,22 @@ workbox.routing.registerRoute(
     ],
   })
 );
+// Cache the hero image
+workbox.routing.registerRoute(
+  new RegExp('/hero-img.jpg'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'hero-image-cache',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200], // Cache only successful responses
+      }),
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 1, // Only keep the latest version of the hero image
+        maxAgeSeconds: 7 * 24 * 60 * 60, // Cache for 7 days
+      }),
+    ],
+  })
+);
 
 // Cache the cart API responses
 workbox.routing.registerRoute(
