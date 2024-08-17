@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import nookies from "nookies";
+import { ReactNode } from "react"; // <-- Import ReactNode from 'react'
 
 const inter = Inter({ subsets: ["latin"] });
 
