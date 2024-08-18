@@ -3,6 +3,7 @@ import { useProductQuantity } from "@/hooks/useProductQuantity";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/types/Product";
 import BaseButton from "./Button";
+import Image from "next/image";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const { quantity, handleQuantityChange } = useProductQuantity(1);
@@ -15,7 +16,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   return (
     <div className="flex flex-col md:flex-row items-start max-w-6xl px-4 mx-auto py-6 gap-6 lg:gap-12">
       <div className="w-full md:w-1/2">
-        <img
+        <Image
           src={product.image}
           alt="Product Image"
           width={600}

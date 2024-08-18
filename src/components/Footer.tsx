@@ -3,27 +3,12 @@ import { useEffect, useState } from "react";
 import { APP_NAME } from "@/utils/constants";
 import Link from "next/link";
 import { GiLipstick } from "react-icons/gi";
-import { AiOutlineHome, AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import { Routes } from "@/utils/routes";
+import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 
 export default function Footer() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const isVisible = useScrollVisibility(50);
 
   return (
     <footer
