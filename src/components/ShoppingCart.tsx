@@ -2,8 +2,9 @@
 
 import { useRef } from "react";
 import { useCart } from "@/context/CartContext";
-import { useOutsideClick } from "@/hooks/useOutsideClick"; // Adjust the import path as needed
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 import BaseButton from "./Button";
+import Image from "next/image";
 
 export default function ShoppingCart({ onClose }: { onClose: () => void }) {
   const { cartItems, removeFromCart, clearCart, totalPrice, loading } = useCart();
@@ -38,7 +39,7 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
             {cartItems.map((item) => (
               <div key={item.id} className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <img
+                  <Image
                     src={item.image || "/placeholder.svg"}
                     alt={item.name}
                     width={64}
@@ -47,7 +48,7 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
                     style={{ aspectRatio: "64/64", objectFit: "cover" }}
                   />
                   <div>
-                    <h3 className="text-text font-medium">{item.name}</h3>
+                    <h3 className="text-black font-medium">{item.name}</h3>
                     <p className="text-muted-foreground text-sm">
                       ${item.price.toFixed(2)} x {item.quantity}
                     </p>
