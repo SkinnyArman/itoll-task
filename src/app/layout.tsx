@@ -14,16 +14,15 @@ import NetworkCheck from "@/components/NetworkCheck";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PWA NextJS",
-  description: "It's a simple progressive web application made with NextJS",
+  title: "SelfCareBox",
+  description: "SelfCareBox is your go-to app for premium self-care products.",
   generator: "Next.js",
   manifest: "/manifest.json",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
   authors: [
     {
-      name: "imvinojanv",
-      url: "https://www.linkedin.com/in/imvinojanv/",
+      name: "Arman Amini",
     },
   ],
   icons: [

@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiLipstick } from "react-icons/gi";
-import ShoppingCart from "@/components/ShoppingCart"; // Adjust the import path as needed
+import ShoppingCart from "@/components/ShoppingCart";
 import { APP_NAME } from "@/utils/constants";
 import { useTheme } from "@/context/ThemeContext";
+import { IoIosColorPalette } from "react-icons/io";
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Header() {
     <>
       <header className="bg-primary text-text py-4 px-6 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <GiLipstick className="h-6 w-6" onClick={toggleTheme} />
+          <GiLipstick className="h-6 w-6" />
           <span className="text-lg font-semibold">{APP_NAME}</span>
         </Link>
         <div className="flex items-center gap-4">
@@ -31,9 +32,7 @@ export default function Header() {
             <Link href="#" className="hover:underline" prefetch={false}>
               About
             </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              Contact
-            </Link>
+            <IoIosColorPalette className="h-6 w-6 cursor-pointer" onClick={toggleTheme} />
           </nav>
           <button
             className="text-primary-foreground relative"
