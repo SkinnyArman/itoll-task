@@ -1,6 +1,7 @@
 import { CiWifiOff } from "react-icons/ci";
 import BaseButton from "@/components/Button";
 import Link from "next/link";
+import { Routes } from "@/utils/routes";
 
 export default function OfflinePage() {
   return (
@@ -11,7 +12,7 @@ export default function OfflinePage() {
         This page is not available offline. Please check your connection and try
         again.
       </p>
-      <Link href="/">
+      <Link href={Routes.Home}>
         <BaseButton fullWidth={false} mode="secondary" extraClasses="px-4 mt-2">
           Home
         </BaseButton>

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Product } from "@/types/Product";
+import { Routes } from "@/utils/routes";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={Routes.ProductDetails(product.id)}>
       <div
         key={product.id}
         className="bg-white rounded-lg shadow-md overflow-hidden h-[330px] flex flex-col cursor-pointer transform transition-transform duration-300 ease-in-out hover:scale-105 relative"

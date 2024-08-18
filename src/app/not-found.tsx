@@ -1,6 +1,7 @@
 import { CiWarning } from "react-icons/ci";
 import BaseButton from "@/components/Button";
 import Link from "next/link";
+import { Routes } from "@/utils/routes";
 
 export default function NotFoundPage() {
   return (
@@ -11,7 +12,7 @@ export default function NotFoundPage() {
         The page you are looking for does not exist. It might have been moved or
         deleted.
       </p>
-      <Link href="/">
+      <Link href={Routes.Home}>
         <BaseButton fullWidth={false} mode="secondary" extraClasses="px-4 mt-2">
           Home
         </BaseButton>
