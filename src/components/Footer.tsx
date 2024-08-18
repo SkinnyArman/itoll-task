@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { APP_NAME } from "@/utils/constants";
-import { currentYear } from "@/utils/helpers";
 import Link from "next/link";
 import { GiLipstick } from "react-icons/gi";
 import { AiOutlineHome, AiOutlineInfoCircle } from "react-icons/ai";
+import { Routes } from "@/utils/routes";
 
 export default function Footer() {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,20 +38,12 @@ export default function Footer() {
         </div>
         <div className="flex gap-x-6">
           <Link
-            href="#"
+            href={Routes.Home}
             className="flex flex-col items-center justify-center text-center"
             prefetch={false}
           >
             <AiOutlineHome className="md:hidden h-6 w-6 mb-1" />
             <span className="text-sm">Home</span>
-          </Link>
-          <Link
-            href="#"
-            className="flex flex-col items-center justify-center text-center"
-            prefetch={false}
-          >
-            <AiOutlineInfoCircle className="md:hidden h-6 w-6 mb-1" />
-            <span className="text-sm">About</span>
           </Link>
         </div>
       </div>

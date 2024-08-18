@@ -6,9 +6,6 @@ import withPWA from "next-pwa";
 const nextConfig = {
   reactStrictMode: true, // Enable React strict mode for improved error handling
   swcMinify: true, // Enable SWC minification for improved performance
-  fallbacks: {
-    document: "/offline",
-  },
   images: {
     domains: ["cloudflare-ipfs.com"],
   },

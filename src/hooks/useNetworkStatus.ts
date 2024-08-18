@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 export const useNetworkStatus = () => {
   const [isOnline, setOnline] = useState<boolean>(navigator.onLine);
   const [isBackOnline, setIsBackOnline] = useState<boolean>(false);
-  const wasOfflineRef = useRef<boolean>(!navigator.onLine); // Initialize based on current online status
+  const wasOffline = useRef<boolean>(!navigator.onLine); 
 
   const updateNetworkStatus = () => {
     setOnline(navigator.onLine);
@@ -15,11 +15,11 @@ export const useNetworkStatus = () => {
   useEffect(() => {
     const handleOnline = () => {
       updateNetworkStatus();
-      if (wasOfflineRef.current) {
+      if (wasOffline.current) {
         toast.dismiss(); // Clear all previous toasts
         toast.success("You're Back Online!");
         setIsBackOnline(true);
-        wasOfflineRef.current = false;
+        wasOffline.current = false;
       }
     };
 
@@ -27,12 +27,14 @@ export const useNetworkStatus = () => {
       updateNetworkStatus();
       toast.dismiss(); // Clear all previous toasts
       toast.error("You Lost Your Connection.");
-      wasOfflineRef.current = true;
+      wasOffline.current = true;
       setIsBackOnline(false);
     };
 
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
+
+    console.log(navigator.onLine)
 
     return () => {
       window.removeEventListener("online", handleOnline);

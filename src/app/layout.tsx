@@ -7,7 +7,6 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import nookies from "nookies";
 import { ReactNode } from "react";
-import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { Toaster } from "react-hot-toast";
 import NetworkCheck from "@/components/NetworkCheck";
 
@@ -31,15 +30,6 @@ export const metadata: Metadata = {
   ],
 };
 
-// Export viewport configuration separately
-export const viewport = {
-  "minimum-scale": "1",
-  "initial-scale": "1",
-  width: "device-width",
-  "shrink-to-fit": "no",
-  "viewport-fit": "cover",
-};
-
 interface RootLayoutProps {
   children: ReactNode;
   initialTheme: "light" | "dark";
@@ -51,8 +41,7 @@ export default function RootLayout({
 }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
-        <ServiceWorkerRegister />
+      <body className={`${inter.className} pb-20 lg:pb-0`}>
         <ThemeProvider initialTheme={initialTheme}>
           <CartProvider>
             <Toaster position="top-center" />
