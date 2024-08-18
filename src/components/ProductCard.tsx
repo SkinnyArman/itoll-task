@@ -25,7 +25,9 @@ export default function ProductCard({ product }: { product: Product }) {
             <h3 className="text-lg font-semibold text-primary">
               {product.name}
             </h3>
-            <p className="text-dark-grey mt-1">{product.description}</p>
+            <p className="text-dark-grey mt-1 text-sm line-clamp-3">
+              {product.description}
+            </p>
           </div>
           <div className=" font-medium mt-4">
             {product.hasDiscount ? (
