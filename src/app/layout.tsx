@@ -9,6 +9,7 @@ import nookies from "nookies";
 import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 import NetworkCheck from "@/components/NetworkCheck";
+import { Theme } from "@/context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} pb-20 lg:pb-0`}>
-        <ThemeProvider initialTheme={initialTheme}>
+        <ThemeProvider initialTheme={initialTheme as Theme}>
           <CartProvider>
             <Toaster position="top-center" />
             <NetworkCheck />

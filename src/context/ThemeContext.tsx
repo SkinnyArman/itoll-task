@@ -8,7 +8,7 @@ import {
 } from "react";
 import nookies from "nookies";
 
-enum Theme {
+export enum Theme {
   Light = "light",
   Dark = "dark",
 }
