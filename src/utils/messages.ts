@@ -8,4 +8,7 @@ export const messages = {
     removeFromCartFailure: "Failed to remove item from cart",
     clearCartFailure: "Failed to clear the cart",
   },
+  products: {
+    fetchFailure: "Failed to fetch products.",
+  },
 };
