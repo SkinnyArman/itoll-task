@@ -9,6 +9,13 @@ import {
 } from "react";
 import { Product } from "@/types/Product";
 import { CartItem } from "@/types/CartItem";
+import {
+  fetchCartItems,
+  updateCartItem,
+  addCartItem,
+  deleteCartItem,
+} from "@/api/index";
+import { messages } from "@/utils/messages";
 
 interface CartContextProps {
   cartItems: CartItem[];
@@ -27,46 +34,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    async function fetchCart() {
-      const response = await fetch(
-        "https://66be043574dfc195586e5246.mockapi.io/cart"
-      );
-      const data = await response.json();
-      setCartItems(data || []);
-    }
-
-    fetchCart();
-  }, []);
-
-  const updateCartItemOnServer = async (item: CartItem) => {
-    await fetch(`https://66be043574dfc195586e5246.mockapi.io/cart/${item.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    });
-  };
-
-  const addCartItemToServer = async (item: CartItem) => {
-    const response = await fetch(
-      "https://66be043574dfc195586e5246.mockapi.io/cart",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
+    const initializeCart = async () => {
+      try {
+        const items = await fetchCartItems();
+        setCartItems(items);
+      } catch (error) {
+        console.error(messages.cart.fetchFailure, error);
       }
-    );
-    return await response.json();
-  };
+    };
 
-  const deleteCartItemFromServer = async (id: number) => {
-    await fetch(`https://66be043574dfc195586e5246.mockapi.io/cart/${id}`, {
-      method: "DELETE",
-    });
-  };
+    initializeCart();
+  }, []);
 
   const addToCart = async (product: Product, quantity: number = 1) => {
     setLoading(true);
@@ -78,7 +56,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           ...existingItem,
           quantity: existingItem.quantity + quantity,
         };
-        await updateCartItemOnServer(updatedItem);
+        await updateCartItem(updatedItem);
         setCartItems((prevItems) =>
           prevItems.map((item) =>
             item.id === updatedItem.id ? updatedItem : item
@@ -86,11 +64,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         );
       } else {
         const newItem = { ...product, quantity };
-        const serverItem = await addCartItemToServer(newItem);
+        const serverItem = await addCartItem(newItem);
         setCartItems((prevItems) => [...prevItems, serverItem]);
       }
     } catch (error) {
-      console.error("Failed to add item(s) to cart:", error);
+      console.error(messages.cart.addToCartFailure, error);
     } finally {
       setLoading(false);
     }
@@ -99,10 +77,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const removeFromCart = async (id: number) => {
     setLoading(true);
     try {
-      await deleteCartItemFromServer(id);
+      await deleteCartItem(id);
       setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
     } catch (error) {
-      console.error("Failed to remove item from cart:", error);
+      console.error(messages.cart.removeFromCartFailure, error);
     } finally {
       setLoading(false);
     }
@@ -112,11 +90,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true);
     try {
       for (const item of cartItems) {
-        await deleteCartItemFromServer(item.id);
+        await deleteCartItem(item.id);
       }
       setCartItems([]);
     } catch (error) {
-      console.error("Failed to clear the cart:", error);
+      console.error(messages.cart.clearCartFailure, error);
     } finally {
       setLoading(false);
     }
