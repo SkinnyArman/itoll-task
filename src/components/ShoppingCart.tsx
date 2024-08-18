@@ -5,13 +5,28 @@ import { useCart } from "@/context/CartContext";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import BaseButton from "./Button";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 
 export default function ShoppingCart({ onClose }: { onClose: () => void }) {
-  const { cartItems, removeFromCart, clearCart, totalPrice, loading } = useCart();
+  const { cartItems, removeFromCart, clearCart, totalPrice, loading } =
+    useCart();
   const cartRef = useRef<HTMLDivElement>(null);
 
   // Use the custom hook to detect outside clicks
   useOutsideClick(cartRef, onClose);
+
+  const checkout = () => {
+    clearCart()
+      .then(() => {
+        toast.success("Your order is now processing!");
+      })
+      .catch((error) => {
+        console.error("Failed to clear the cart:", error);
+        toast.error(
+          "There was an error processing your order. Please try again."
+        );
+      });
+  };
 
   return (
     <div className="fixed inset-0 bg-primary/50 z-50 flex items-center justify-center">
@@ -61,9 +76,15 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
             ))}
             <div className="flex items-center justify-between border-t pt-4">
               <p className="text-muted-foreground font-medium">Total:</p>
-              <p className="text-text font-medium">${totalPrice.toFixed(2)}</p>
+              <p className="text-black font-medium">${totalPrice.toFixed(2)}</p>
             </div>
-            <BaseButton mode="primary" rounded="md" extraClasses="h-10 py-2 mt-4" loading={loading}>
+            <BaseButton
+              mode="primary"
+              rounded="md"
+              extraClasses="h-10 py-2 mt-4"
+              loading={loading}
+              onClick={checkout}
+            >
               Checkout
             </BaseButton>
           </div>
