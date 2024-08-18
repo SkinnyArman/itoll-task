@@ -28,8 +28,12 @@ export default function Header() {
           <span className="text-lg font-semibold">{APP_NAME}</span>
         </Link>
         <div className="flex items-center gap-4">
-          <nav className="hidden md:flex items-center gap-4">
-            <Link href={`${Routes.Home}#products`} className="hover:underline" prefetch={false}>
+          <nav className="md:flex items-center gap-4">
+            <Link
+              href={`${Routes.Home}#products`}
+              className="hidden hover:underline"
+              prefetch={false}
+            >
               Shop
             </Link>
             <IoIosColorPalette
