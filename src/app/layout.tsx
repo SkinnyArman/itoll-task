@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import nookies from "nookies";
 import { ReactNode } from "react";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import { Toaster } from "react-hot-toast";
+import NetworkCheck from "@/components/NetworkCheck";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,6 +56,8 @@ export default function RootLayout({
         <ServiceWorkerRegister />
         <ThemeProvider initialTheme={initialTheme}>
           <CartProvider>
+            <Toaster position="top-center" />
+            <NetworkCheck />
             <Header />
             {children}
             <Footer />
