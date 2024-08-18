@@ -27,7 +27,7 @@ export default function HeroSection() {
         </div>
         <div className="flex justify-center">
           <Image
-            src="/hero-img.jpg"
+            src="/hero-image.webp"
             alt="a man smiling and holding a personal care product"
             width={400}
             height={400}
