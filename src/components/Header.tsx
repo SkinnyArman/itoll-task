@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <>
       <header className="bg-primary text-text py-4 px-6 flex items-center justify-between">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
+        <Link href={Routes.Home} className="flex items-center gap-2" prefetch={false}>
           <GiLipstick className="h-6 w-6" />
           <span className="text-lg font-semibold">{APP_NAME}</span>
         </Link>
