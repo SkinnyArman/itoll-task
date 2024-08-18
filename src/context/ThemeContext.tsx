@@ -38,8 +38,10 @@ export const ThemeProvider = ({
   initialTheme = Theme.Dark,
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const cookieTheme = nookies.get(null).theme as Theme;
-    return cookieTheme || initialTheme;
+    const cookieTheme = nookies.get(null).theme;
+    return cookieTheme === Theme.Light || cookieTheme === Theme.Dark
+      ? (cookieTheme as Theme)
+      : initialTheme;
   });
 
   const [isThemeApplied, setIsThemeApplied] = useState(false);
