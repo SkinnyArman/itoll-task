@@ -5,7 +5,7 @@ import { fetchProducts } from "@/api/index";
 export default async function Component() {
   try {
     // Fetching products with caching strategy
-    const data = await fetchProducts({ cache: "force-cache" });
+    const data = await fetchProducts({ cache: "no-store" });
 
     return (
       <div className="flex flex-col min-h-[100dvh]">
