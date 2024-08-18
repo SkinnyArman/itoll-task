@@ -1,5 +1,3 @@
-// utils/api.ts
-
 import { API_BASE_URL } from "@/utils/constants";
 import { CartItem } from "@/types/CartItem";
 import { messages } from "@/utils/messages";
@@ -63,6 +61,19 @@ export const deleteCartItem = async (id: number): Promise<void> => {
 
 export const fetchProducts = async (options?: RequestInit): Promise<any[]> => {
   const response = await fetch(`${API_BASE_URL}/products`, {
+    ...options,
+  });
+  if (!response.ok) {
+    throw new Error(messages.products.fetchFailure);
+  }
+  return response.json();
+};
+
+export const fetchProductDetails = async (
+  id: string,
+  options?: RequestInit
+): Promise<any> => {
+  const response = await fetch(`${API_BASE_URL}/products/${id}`, {
     ...options,
   });
   if (!response.ok) {

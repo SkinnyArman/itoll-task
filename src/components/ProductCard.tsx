@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Product } from "@/types/Product";
 import { Routes } from "@/utils/routes";
+import Image from "next/image";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -11,7 +12,7 @@ export default function ProductCard({ product }: { product: Product }) {
       >
         <div className="relative">
           {product.isBestSeller && <BestSellerBadge />}
-          <img
+          <Image
             src={product.image}
             alt={`Product ${product.name}`}
             width={200}
@@ -25,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <h3 className="text-lg font-semibold text-primary">
               {product.name}
             </h3>
-            <p className="text-dark-grey mt-1 text-sm line-clamp-3">
+            <p className="text-black mt-1 text-sm line-clamp-3">
               {product.description}
             </p>
           </div>

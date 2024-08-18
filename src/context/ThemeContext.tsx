@@ -2,13 +2,16 @@
 import {
   createContext,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useState,
   ReactNode,
 } from "react";
 import nookies from "nookies";
 
-type Theme = "light" | "dark";
+enum Theme {
+  Light = "light",
+  Dark = "dark",
+}
 
 interface ThemeContextProps {
   theme: Theme;
@@ -32,32 +35,39 @@ interface ThemeProviderProps {
 
 export const ThemeProvider = ({
   children,
-  initialTheme = "dark",
+  initialTheme = Theme.Dark,
 }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<Theme>(initialTheme);
-
-  useEffect(() => {
-    // Get the theme from the cookie or use initialTheme
+  const [theme, setTheme] = useState<Theme>(() => {
     const cookieTheme = nookies.get(null).theme as Theme;
-    if (cookieTheme) {
-      setTheme(cookieTheme);
-    } else {
-      setTheme(initialTheme);
-    }
-  }, [initialTheme]);
+    return cookieTheme || initialTheme;
+  });
 
-  useEffect(() => {
-    // Apply the theme to the <html> element
-    document.documentElement.classList.remove("light", "dark");
+  const [isThemeApplied, setIsThemeApplied] = useState(false);
+
+  useLayoutEffect(() => {
+    document.documentElement.classList.remove(Theme.Light, Theme.Dark);
     document.documentElement.classList.add(theme);
 
     // Save the preference in cookies
     nookies.set(null, "theme", theme, { path: "/" });
+
+    setIsThemeApplied(true);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    setTheme((prevTheme) =>
+      prevTheme === Theme.Dark ? Theme.Light : Theme.Dark
+    );
   };
+
+  if (!isThemeApplied) {
+    // Return a loading screen while waiting for the theme to be applied
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+        <div className="w-12 h-12 border-4 border-t-transparent border-gray-600 dark:border-white rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

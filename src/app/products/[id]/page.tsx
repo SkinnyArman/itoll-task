@@ -1,5 +1,6 @@
 import ProductDetails from "@/components/ProductDetails";
 import { CiWifiOff } from "react-icons/ci";
+import { fetchProductDetails } from "@/api/index";
 
 interface ProductDetailsPageParams {
   params: {
@@ -13,17 +14,9 @@ export default async function ProductDetailsPage({
   let product;
 
   try {
-    product = await fetch(
-      `https://66be043574dfc195586e5246.mockapi.io/products/${params.id}`,
-      { cache: "no-store" }
-    ).then((res) => {
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return res.json();
-    });
+    product = await fetchProductDetails(params.id, { cache: "no-store" });
   } catch (error) {
-    console.error("Fetch failed or product not available in cache:", error);
+    console.error("Fetch failed", error);
 
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">

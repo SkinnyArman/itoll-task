@@ -6,6 +6,7 @@ import { useOutsideClick } from "@/hooks/useOutsideClick";
 import BaseButton from "./Button";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
+import { messages } from "@/utils/messages";
 
 export default function ShoppingCart({ onClose }: { onClose: () => void }) {
   const { cartItems, removeFromCart, clearCart, totalPrice, loading } =
@@ -18,13 +19,10 @@ export default function ShoppingCart({ onClose }: { onClose: () => void }) {
   const checkout = () => {
     clearCart()
       .then(() => {
-        toast.success("Your order is now processing!");
+        toast.success(messages.cart.checkoutSuccess);
       })
       .catch((error) => {
-        console.error("Failed to clear the cart:", error);
-        toast.error(
-          "There was an error processing your order. Please try again."
-        );
+        toast.error(messages.cart.checkoutFailure);
       });
   };
 

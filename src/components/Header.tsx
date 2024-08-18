@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiLipstick } from "react-icons/gi";
-import ShoppingCart from "@/components/ShoppingCart";
 import { APP_NAME } from "@/utils/constants";
 import { useTheme } from "@/context/ThemeContext";
 import { IoIosColorPalette } from "react-icons/io";
+import { Routes } from "@/utils/routes";
+
+// Dynamically import the ShoppingCart component
+const ShoppingCart = lazy(() => import("@/components/ShoppingCart"));
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -26,13 +29,13 @@ export default function Header() {
         </Link>
         <div className="flex items-center gap-4">
           <nav className="hidden md:flex items-center gap-4">
-            <Link href="#" className="hover:underline" prefetch={false}>
+            <Link href={`${Routes.Home}#products`} className="hover:underline" prefetch={false}>
               Shop
             </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              About
-            </Link>
-            <IoIosColorPalette className="h-6 w-6 cursor-pointer" onClick={toggleTheme} />
+            <IoIosColorPalette
+              className="h-6 w-6 cursor-pointer"
+              onClick={toggleTheme}
+            />
           </nav>
           <button
             className="text-primary-foreground relative"
@@ -44,7 +47,19 @@ export default function Header() {
         </div>
       </header>
 
-      {isCartOpen && <ShoppingCart onClose={toggleCart} />}
+      {isCartOpen && (
+        <Suspense fallback={<LoadingSpinner />}>
+          <ShoppingCart onClose={toggleCart} />
+        </Suspense>
+      )}
     </>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 bg-gray-500 z-50">
+      <div className="w-12 h-12 border-4 border-t-transparent border-white rounded-full animate-spin"></div>
+    </div>
   );
 }

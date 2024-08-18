@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true, // Enable React strict mode for improved error handling
   swcMinify: true, // Enable SWC minification for improved performance
   images: {
-    domains: ["cloudflare-ipfs.com"],
+    domains: ["cloudflare-ipfs.com", "i.postimg.cc", "postimg.cc"],
   },
 };
 
