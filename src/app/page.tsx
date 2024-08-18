@@ -1,5 +1,6 @@
 import ProductSection from "@/components/ProductSection";
 import HeroSection from "@/components/HeroSection";
+import NetworkCheck from "@/components/NetworkCheck";
 import { fetchProducts } from "@/api/index";
 
 export default async function Component() {
@@ -9,6 +10,7 @@ export default async function Component() {
 
     return (
       <div className="flex flex-col min-h-[100dvh]">
+        <NetworkCheck />
         <main className="flex-1">
           <HeroSection />
           <ProductSection products={data} />

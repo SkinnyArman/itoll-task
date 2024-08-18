@@ -8,7 +8,6 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import nookies from "nookies";
 import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
-import NetworkCheck from "@/components/NetworkCheck";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,7 +44,6 @@ export default function RootLayout({
         <ThemeProvider initialTheme={initialTheme}>
           <CartProvider>
             <Toaster position="top-center" />
-            <NetworkCheck />
             <Header />
             {children}
             <Footer />

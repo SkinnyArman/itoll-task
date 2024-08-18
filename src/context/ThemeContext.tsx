@@ -41,8 +41,6 @@ export const ThemeProvider = ({
     const cookieTheme = nookies.get(null).theme as Theme;
     if (cookieTheme) {
       setTheme(cookieTheme);
-    } else {
-      setTheme(initialTheme);
     }
   }, [initialTheme]);
 
