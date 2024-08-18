@@ -28,3 +28,12 @@ self.addEventListener("install", (event) => {
     })
   );
 });
+
+// Serve the offline fallback page when network is unavailable
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      return caches.match("/~offline");
+    })
+  );
+});
