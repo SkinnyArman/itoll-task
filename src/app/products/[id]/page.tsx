@@ -13,7 +13,6 @@ export default async function ProductDetailsPage({
   let product;
 
   try {
-    // Fetch the product data, allowing the browser to use cached responses
     product = await fetch(
       `https://66be043574dfc195586e5246.mockapi.io/products/${params.id}`,
       { cache: "no-store" }
@@ -26,7 +25,6 @@ export default async function ProductDetailsPage({
   } catch (error) {
     console.error("Fetch failed or product not available in cache:", error);
 
-    // Display fallback UI if the product data is not available offline
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <CiWifiOff className="w-20 h-20" />
@@ -39,6 +37,5 @@ export default async function ProductDetailsPage({
     );
   }
 
-  // Render the product details if product data is available
   return <ProductDetails product={product} />;
 }

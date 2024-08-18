@@ -27,7 +27,7 @@ export default function ProductDetails({ product }: { product: Product }) {
       <div className="flex flex-col w-full md:w-1/2 gap-4">
         <h1 className="font-bold text-3xl">{product.name}</h1>
         <div>
-          <p>{product.description}</p>
+          <p>{product.detailedDescription}</p>
         </div>
         <div className="text-4xl font-bold mt-2">${product.price}</div>
 
